@@ -1,0 +1,65 @@
+global:
+  edition: ce
+  hosts:
+    domain: localhost
+    externalIP: 127.0.0.1
+
+  ingress:
+    configureCertmanager: false  # cert-manager 사용 안함
+    class: "nginx"
+    tls:
+      enabled: true
+  nginx-ingress: # gitlab nginx-ingress 컴퍼넌트 미사용
+    enabled: false
+
+  storage:
+    backend: minio
+    minio:
+      enabled: true
+
+  psql:
+    host: postgresql.yoon-gitlab.svc.cluster.local
+    port: 5432
+    password:
+      secret: yoondb
+      key: yoonpassword
+
+  redis:
+    host: redis.yoon-gitlab.svc.cluster.local
+    port: 6379
+
+certmanager:
+  install: false  # cert-manager 설치 안함
+
+gitlab:
+  gitaly:
+    persistence:
+      enabled: true
+      existingClaim: yoon-gitaly-pvc
+      size: 10Gi
+      accessMode: ReadWriteOnce
+
+  minio:
+    enabled: true
+    persistence:
+      enabled: true
+      size: 10Gi
+      existingClaim: yoon-minio-pvc
+      accessMode: ReadWriteOnce
+
+  redis:
+    enabled: true
+    persistence:
+      enabled: true
+      size: 5Gi
+      existingClaim: yoon-redis-pvc
+      accessMode: ReadWriteOnce
+
+  postgresql:
+    enabled: true
+    persistence:
+      enabled: true
+      size: 10Gi
+      existingClaim: yoon-postgresql-pvc
+      accessMode: ReadWriteOnce
+

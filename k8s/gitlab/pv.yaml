@@ -1,0 +1,72 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: yoon-gitaly-pv
+spec:
+  volumeMode: Filesystem
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: "hostpath"
+  hostPath:
+    path: "/Volumes/data/k8s/edu/gitaly"
+  claimRef:
+   name: yoon-gitaly-pvc
+   namespace: yoon-gitlab
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: yoon-minio-pv
+spec:
+  volumeMode: Filesystem
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: "hostpath"
+  hostPath:
+    path: "/Volumes/data/k8s/edu/minio"
+  claimRef:
+   name: yoon-minio-pvc
+   namespace: yoon-gitlab
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: yoon-redis-pv
+spec:
+  volumeMode: Filesystem
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: "hostpath"
+  hostPath:
+    path: "/Volumes/data/k8s/edu/redis"
+  claimRef:
+   name: yoon-redis-pvc
+   namespace: yoon-gitlab
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: yoon-postgresql-pv
+spec:
+  volumeMode: Filesystem
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: "hostpath"
+  hostPath:
+    path: "/Volumes/data/k8s/edu/postgresql"
+  claimRef:
+   name: yoon-postgresql-pvc
+   namespace: yoon-gitlab
+
